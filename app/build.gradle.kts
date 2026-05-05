@@ -5,10 +5,15 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("jacoco")
 }
+jacoco {
+    toolVersion = "0.8.11"
+}
 tasks.withType<Test> {
+    useJUnitPlatform()
     extensions.configure(JacocoTaskExtension::class) {
         isIncludeNoLocationClasses = true
-        excludes = listOf("jdk.internal.*")
+        // On exclut les classes générées dynamiquement par le JDK qui font planter JaCoCo 0.8.11
+        excludes = listOf("jdk.internal.*", "sun.*", "com.sun.*", "jdk.proxy.*")
     }
 }
 android {
@@ -16,7 +21,7 @@ android {
     compileSdk = 34
 
     testCoverage {
-        version = "0.8.8"
+        version = "0.8.11"
     }
 
     defaultConfig {
@@ -106,7 +111,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
