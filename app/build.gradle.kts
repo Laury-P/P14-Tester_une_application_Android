@@ -111,6 +111,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.espresso.contrib)
 
     // Test unitaires
     testImplementation(libs.junit.jupiter)
