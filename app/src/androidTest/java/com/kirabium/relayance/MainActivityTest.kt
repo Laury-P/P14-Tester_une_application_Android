@@ -2,6 +2,7 @@ package com.kirabium.relayance
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
@@ -11,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kirabium.relayance.data.DummyData
+import com.kirabium.relayance.ui.activity.AddCustomerActivity
 import com.kirabium.relayance.ui.activity.DetailActivity
 import com.kirabium.relayance.ui.activity.MainActivity
 import com.kirabium.relayance.util.RecyclerViewItemCountAssertion
@@ -65,9 +67,17 @@ class MainActivityTest {
         )
     }
 
+    @Test
+    fun clickOnFabButton_shouldRedirectToAddCustomer() {
+        // WHEN
+        onView(withId(R.id.addCustomerFab)).perform(click())
 
-
-
-
+        //THEN
+        intended(
+            allOf(
+                hasComponent(AddCustomerActivity::class.java.name)
+            )
+        )
+    }
 
 }
