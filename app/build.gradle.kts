@@ -3,6 +3,8 @@ import com.android.build.api.dsl.CommonExtension
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     id("jacoco")
 }
 jacoco {
@@ -122,6 +124,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.espresso.contrib)
+
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 
     // Test unitaires
     testImplementation(libs.junit.jupiter)
