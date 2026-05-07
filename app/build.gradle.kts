@@ -1,8 +1,8 @@
-import com.android.build.gradle.BaseExtension
+import com.android.build.api.dsl.CommonExtension
 
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.compose.compiler)
     id("jacoco")
 }
 jacoco {
@@ -16,6 +16,7 @@ tasks.withType<Test> {
         excludes = listOf("jdk.internal.*", "sun.*", "com.sun.*", "jdk.proxy.*")
     }
 }
+
 android {
     namespace = "com.kirabium.relayance"
     compileSdk = 34
@@ -58,9 +59,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
     }
@@ -74,7 +73,7 @@ android {
     }
 }
 
-val androidExtension = extensions.getByType<BaseExtension>()
+val androidExtension = extensions.getByType<CommonExtension>()
 
 val jacocoTestReport by tasks.registering(JacocoReport::class) {
     dependsOn("testDebugUnitTest", "createDebugCoverageReport")
@@ -93,7 +92,7 @@ val jacocoTestReport by tasks.registering(JacocoReport::class) {
     val debugTree = fileTree("${layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
         exclude(fileFilter)
     }
-    val mainSrc = androidExtension.sourceSets.getByName("main").java.srcDirs
+    val mainSrc = androidExtension.sourceSets.getByName("main").java.srcDirs()
 
     classDirectories.setFrom(debugTree)
     sourceDirectories.setFrom(files(mainSrc))
@@ -126,6 +125,7 @@ dependencies {
 
     // Test unitaires
     testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
 
     // Test d'instrumentation
     androidTestImplementation(libs.androidx.junit4)
