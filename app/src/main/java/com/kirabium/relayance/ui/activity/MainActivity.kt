@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirabium.relayance.data.DummyData
 import com.kirabium.relayance.databinding.ActivityMainBinding
 import com.kirabium.relayance.ui.adapter.CustomerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

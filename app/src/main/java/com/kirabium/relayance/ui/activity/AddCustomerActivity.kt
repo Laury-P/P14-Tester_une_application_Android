@@ -3,7 +3,9 @@ package com.kirabium.relayance.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kirabium.relayance.databinding.ActivityAddCustomerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddCustomerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddCustomerBinding
