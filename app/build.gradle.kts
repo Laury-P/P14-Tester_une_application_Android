@@ -85,14 +85,25 @@ val jacocoTestReport by tasks.registering(JacocoReport::class) {
         xml.required.set(true)
         html.required.set(true)
     }
+    val fileFilter = listOf(
+        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
+        "**/*Test*.*", "android/**/*.*", "**/androidx/**/*.*",
+        "**/*$*.*")
 
-    val debugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug")
+    val debugTree = fileTree("${layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
     val mainSrc = androidExtension.sourceSets.getByName("main").java.srcDirs
 
     classDirectories.setFrom(debugTree)
     sourceDirectories.setFrom(files(mainSrc))
-    executionData.setFrom(fileTree(buildDir) {
-        include("**/*.exec", "**/*.ec")
+    executionData.setFrom(fileTree(layout.buildDirectory.get()) {
+        include(
+        "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+        "outputs/code_coverage/debugAndroidTest/connected/*/*.ec",
+
+        "**/*.exec",
+        "**/*.ec")
     })
 }
 
