@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CustomerRepository {
     fun getCustomers(): Flow<List<Customer>>
+    fun getCustomerById(id: Int): Flow<Customer?>
 }
 
 
