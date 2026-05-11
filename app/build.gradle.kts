@@ -21,7 +21,7 @@ tasks.withType<Test> {
 
 android {
     namespace = "com.kirabium.relayance"
-    compileSdk = 34
+    compileSdk = 36
 
     testCoverage {
         version = "0.8.11"
