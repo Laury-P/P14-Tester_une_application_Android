@@ -126,6 +126,7 @@ dependencies {
     implementation(libs.androidx.espresso.contrib)
 
     implementation(libs.hilt)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     ksp(libs.hilt.compiler)
 
     // Test unitaires
