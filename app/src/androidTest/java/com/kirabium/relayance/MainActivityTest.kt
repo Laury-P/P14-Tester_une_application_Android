@@ -43,7 +43,7 @@ class MainActivityTest {
     @Test
     fun customerListInitialCount_shouldHaveCorrectNumberOfItem() {
         // GIVEN
-        val expectedCount = DummyData.customers.size
+        val expectedCount = DummyData.customers.value.size
 
         onView(withId(R.id.customerRecyclerView))
             .check(RecyclerViewItemCountAssertion.withItemCount(expectedCount))
@@ -52,7 +52,7 @@ class MainActivityTest {
     @Test
     fun clickOnCustomer_shouldSendCorrectIntentWithId() {
         // GIVEN
-        val targetCustomer = DummyData.customers[0]
+        val targetCustomer = DummyData.customers.value[0]
 
         // WHEN
         onView(withId(R.id.customerRecyclerView))

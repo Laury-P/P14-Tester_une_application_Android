@@ -36,7 +36,7 @@ class DetailActivityTest {
     fun detailActivity_withAliceId_shouldDisplayAliceInfo_withoutNewCustomerTag() {
         // GIVEN
         val targetID = 1
-        val targetCustomer = DummyData.customers.find { it.id == targetID }
+        val targetCustomer = DummyData.customers.value.find { it.id == targetID }
             ?: throw Exception("Client non trouvé dans DummyData")
 
         // WHEN
@@ -51,7 +51,7 @@ class DetailActivityTest {
     @Test
     fun detailActivity_withNewClient_shouldDisplayNewTag() {
         val targetID = 5
-        val targetCustomer = DummyData.customers.find { it.id == targetID }
+        val targetCustomer = DummyData.customers.value.find { it.id == targetID }
             ?: throw Exception("Client non trouvé dans DummyData")
 
         // WHEN
