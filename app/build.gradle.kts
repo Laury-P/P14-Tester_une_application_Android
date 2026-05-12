@@ -34,7 +34,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.CucumberAndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -124,9 +124,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.espresso.contrib)
-
-    implementation(libs.hilt)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.hilt)
+
     ksp(libs.hilt.compiler)
 
     // Test unitaires
@@ -143,6 +143,9 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)
+
+    androidTestImplementation(libs.cucumber.android)
+    androidTestImplementation(libs.cucumber.hilt)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

@@ -18,6 +18,7 @@ espressoContrib = "3.7.0"
 hilt = "2.59.1"
 ksp = "2.3.4"
 lifecycleRuntimeCompose = "2.10.0"
+cucumber = "7.18.1"
 
 
 [libraries]
@@ -48,6 +49,8 @@ androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+cucumber-android = { group = "io.cucumber", name = "cucumber-android", version.ref = "cucumber" }
+cucumber-hilt = {group = "io.cucumber", name = "cucumber-android-hilt", version.ref = "cucumber" }
 
 
 [plugins]
