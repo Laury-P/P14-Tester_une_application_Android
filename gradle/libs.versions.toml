@@ -51,6 +51,7 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.r
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 cucumber-android = { group = "io.cucumber", name = "cucumber-android", version.ref = "cucumber" }
 cucumber-hilt = {group = "io.cucumber", name = "cucumber-android-hilt", version.ref = "cucumber" }
+cucumber-junit = { group = "io.cucumber", name = "cucumber-junit", version.ref = "cucumber" }
 
 
 [plugins]

@@ -34,7 +34,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.CucumberAndroidJUnitRunner"
+        testInstrumentationRunner = "com.kirabium.relayance.test.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -71,6 +71,11 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    sourceSets {
+        named("androidTest") {
+            assets.srcDirs("src/androidTest/assets")
         }
     }
 }
@@ -146,6 +151,7 @@ dependencies {
 
     androidTestImplementation(libs.cucumber.android)
     androidTestImplementation(libs.cucumber.hilt)
+    androidTestImplementation(libs.cucumber.junit)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

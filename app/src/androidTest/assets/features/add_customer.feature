@@ -1,35 +1,36 @@
-Feature: Gestion de l'ajout de client
+Feature: Add customer
 
   Background:
-    Given Je suis l'écran d'ajout d'un client
+    Given I am on the add customer screen
 
-  Scenario Outline: Ajout réussi d'un client valide
-    When Je saisis "<nom>" dans le champs nom
-    And Je saisis "<email>" dans le champs email
-    And Je clique sur le bouton de sauvegarde
-    Then L'application navigue vers l'ecran d'acceuil
-    And Le client "<nom>" est présent dans la liste
+
+  Scenario Outline: Success adding a customer
+    When I type "<name>" in the name field
+    And I type "<email>" in the email field
+    And I click on the save button
+    Then The app navigate to the main screen
+    And The customer named "<name>" appear in the list
 
     Examples:
-      | nom          | email                 |
+      | name          | email                 |
       | Jean Dupont  | jean.dupont@email.fr  |
       | Alfred Baron | alfred.baron@email.fr |
 
-  Scenario Outline: Validation des champs obligatoires
-    When Je saisis "<nom>" dans le champs nom
-    And Je saisis "<email>" dans le champs email
-    And Je clique sur le bouton de sauvegarde
-    Then Je devrait voir le message d'erreur "<message>"
-    And Je devrait rester sur l'écran d'ajout
+  Scenario Outline: All field should be correctly filled
+    When I type "<name>" in the name field
+    And I type "<email>" in the email field
+    And I click on the save button
+    Then I should see the error message "<message>"
+    And I should stay on the add customer screen
 
     Examples:
-      | nom           | email                   | message                               |
+      | name           | email                   | message                               |
       | Amelie Lottin |                         | Veuillez renseigner l'email du client |
       |               | amelie.lottin@email.com | Veuillez renseigner le nom du client  |
       | Amelie Lottin | amelie.lottin@email     | Email invalide                        |
       | Amelie Lottin | @email.com              | Email invalide                        |
 
-    Scenario: Le bouton de sauvegarde rest désactivé si les champs sont vides
-      When Je saisis "" dans le champs nom
-      And Je saisis "" dans le champs email
-      Then Le bouton de sauvegarde doit être désactivé
+  Scenario: The save button should be disabled when both field are empty
+    When I type "" in the name field
+    And I type "" in the email field
+    Then The save button should be disabled
