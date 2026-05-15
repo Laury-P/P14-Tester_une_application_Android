@@ -21,9 +21,11 @@ lifecycleRuntimeCompose = "2.10.0"
 cucumber = "7.18.1"
 
 
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+junit-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiter" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
@@ -51,6 +53,7 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.r
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 cucumber-android = { group = "io.cucumber", name = "cucumber-android", version.ref = "cucumber" }
 cucumber-hilt = {group = "io.cucumber", name = "cucumber-android-hilt", version.ref = "cucumber" }
+cucumber-java = { group = "io.cucumber", name = "cucumber-java", version.ref = "cucumber" }
 cucumber-junit = { group = "io.cucumber", name = "cucumber-junit", version.ref = "cucumber" }
 
 
