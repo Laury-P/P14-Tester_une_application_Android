@@ -19,6 +19,10 @@ hilt = "2.59.1"
 ksp = "2.3.4"
 lifecycleRuntimeCompose = "2.10.0"
 cucumber = "7.18.1"
+androidxTestRunner = "1.7.0"
+mockk = "1.14.0"
+turbine = "1.0.0"
+kotlinxCoroutinesTest = "1.8.0"
 
 
 
@@ -55,7 +59,10 @@ cucumber-android = { group = "io.cucumber", name = "cucumber-android", version.r
 cucumber-hilt = {group = "io.cucumber", name = "cucumber-android-hilt", version.ref = "cucumber" }
 cucumber-java = { group = "io.cucumber", name = "cucumber-java", version.ref = "cucumber" }
 cucumber-junit = { group = "io.cucumber", name = "cucumber-junit", version.ref = "cucumber" }
-
+androidx-test-runner = {group = "androidx.test", name = "runner", version.ref = "androidxTestRunner"}
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

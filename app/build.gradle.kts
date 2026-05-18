@@ -138,6 +138,9 @@ dependencies {
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.junit.api)
     testRuntimeOnly(libs.junit.platform.launcher)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // Test d'instrumentation
     androidTestImplementation(libs.androidx.junit4)
@@ -155,6 +158,8 @@ dependencies {
     androidTestImplementation(libs.cucumber.hilt)
     androidTestImplementation(libs.cucumber.junit)
     androidTestImplementation(libs.cucumber.java)
+    androidTestImplementation(libs.androidx.test.runner)
+
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
