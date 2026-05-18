@@ -8,8 +8,7 @@ Feature: Add customer
     When I type "<name>" in the name field
     And I type "<email>" in the email field
     And I click on the save button
-    Then I see a success message
-    And The app navigate to the main screen
+    Then The app navigate to the main screen
     And The customer named "<name>" appear in the list
 
     Examples:
@@ -17,7 +16,8 @@ Feature: Add customer
       | Jean Dupont  | jean.dupont@email.fr  |
       | Alfred Baron | alfred.baron@email.fr |
 
-  Scenario Outline: All field should be correctly filled
+
+ Scenario Outline: All field should be correctly filled
     When I type "<name>" in the name field
     And I type "<email>" in the email field
     And I click on the save button

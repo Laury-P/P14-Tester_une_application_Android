@@ -12,6 +12,10 @@ class CustomerRepositoryImpl @Inject constructor(private val dataSource: DummyDa
     override fun getCustomerById(id: Int): Flow<Customer?> = dataSource.customers.map{list ->
         list.find { it.id == id }
     }
+
+    override fun addCustomer(name: String, email: String) {
+        dataSource.addCustomer(name, email)
+    }
 }
 
 

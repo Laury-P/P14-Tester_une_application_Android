@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions
 
 @CucumberOptions(
     features = ["features"],
-    glue = ["com.kirabium.relayance.test.steps"],
+    glue = ["com.kirabium.relayance.steps"],
     plugin = ["pretty"]
 )
 class CustomTestRunner : CucumberAndroidJUnitRunner() {

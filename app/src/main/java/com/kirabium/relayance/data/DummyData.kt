@@ -13,6 +13,12 @@ object DummyData {
         return calendar.time
     }
 
+    fun addCustomer(name: String, email: String) {
+        val newId = customers.value.size + 1
+        customers.value += Customer(newId, name, email, generateDate(0))
+    }
+
+
     val customers = MutableStateFlow(
         listOf(
             Customer(1, "Alice Wonderland", "alice@example.com", generateDate(12)),
