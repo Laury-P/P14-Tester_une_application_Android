@@ -1,4 +1,7 @@
 Feature: Add customer
+  En tant que manager du service client
+  Je veux pouvoir ajouter de nouveau client dans l'application
+  Afin d'avoir une liste de client à jour
 
   Background:
     Given I am on the add customer screen
