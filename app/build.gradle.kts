@@ -18,6 +18,13 @@ tasks.withType<Test> {
         excludes = listOf("jdk.internal.*", "sun.*", "com.sun.*", "jdk.proxy.*")
     }
 }
+fun getInstrumentationRunner(): String {
+    return if (project.hasProperty("cucumber")) {
+        "com.kirabium.relayance.test.CustomTestRunner" // Ton runner Cucumber
+    } else {
+        "androidx.test.runner.AndroidJUnitRunner" // Le runner classique pour tes autres tests
+    }
+}
 
 android {
     namespace = "com.kirabium.relayance"
@@ -34,7 +41,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.kirabium.relayance.test.CustomTestRunner"
+        testInstrumentationRunner = getInstrumentationRunner()
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -58,8 +65,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -91,28 +98,30 @@ val jacocoTestReport by tasks.registering(JacocoReport::class) {
         xml.required.set(true)
         html.required.set(true)
     }
+
     val fileFilter = listOf(
         "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
         "**/*Test*.*", "android/**/*.*", "**/androidx/**/*.*",
-        "**/*$*.*")
+        "**/*$*.*"
+    )
 
-    val debugTree = fileTree("${layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+    val debugTree = fileTree("${layout.buildDirectory.get().asFile}/tmp/kotlin-classes/debug") {
         exclude(fileFilter)
     }
-    val mainSrc = androidExtension.sourceSets.getByName("main").java.srcDirs()
 
     classDirectories.setFrom(debugTree)
-    sourceDirectories.setFrom(files(mainSrc))
-    executionData.setFrom(fileTree(layout.buildDirectory.get()) {
-        include(
-        "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
-        "outputs/code_coverage/debugAndroidTest/connected/*/*.ec",
 
-        "**/*.exec",
-        "**/*.ec")
+    sourceDirectories.setFrom(files("src/main/java"))
+
+    executionData.setFrom(fileTree(layout.buildDirectory.get().asFile) {
+        include(
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+            "outputs/code_coverage/debugAndroidTest/connected/*/*.ec",
+            "**/*.exec",
+            "**/*.ec"
+        )
     })
 }
-
 
 dependencies {
 
