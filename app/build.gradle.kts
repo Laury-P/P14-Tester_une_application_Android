@@ -1,15 +1,14 @@
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.gradle.BaseExtension
 
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
-    id("jacoco")
+    jacoco
 }
-jacoco {
-    toolVersion = "0.8.11"
-}
+
 tasks.withType<Test> {
     useJUnitPlatform()
     extensions.configure(JacocoTaskExtension::class) {
@@ -17,6 +16,12 @@ tasks.withType<Test> {
         // On exclut les classes générées dynamiquement par le JDK qui font planter JaCoCo 0.8.11
         excludes = listOf("jdk.internal.*", "sun.*", "com.sun.*", "jdk.proxy.*")
     }
+
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
+    }
+
 }
 fun getInstrumentationRunner(): String {
     return if (project.hasProperty("cucumber")) {
@@ -29,10 +34,6 @@ fun getInstrumentationRunner(): String {
 android {
     namespace = "com.kirabium.relayance"
     compileSdk = 36
-
-    testCoverage {
-        version = "0.8.11"
-    }
 
     defaultConfig {
         applicationId = "com.kirabium.relayance"
@@ -64,6 +65,9 @@ android {
             enableUnitTestCoverage = true
         }
     }
+    testOptions {
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -82,46 +86,13 @@ android {
     }
     sourceSets {
         named("androidTest") {
-            assets.srcDirs("src/androidTest/assets")
+            assets.setSrcDirs(listOf("src/androidTest/assets"))
         }
     }
 }
 
-val androidExtension = extensions.getByType<CommonExtension>()
 
-val jacocoTestReport by tasks.registering(JacocoReport::class) {
-    dependsOn("testDebugUnitTest", "createDebugCoverageReport")
-    group = "Reporting"
-    description = "Generate Jacoco coverage reports"
 
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-    }
-
-    val fileFilter = listOf(
-        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
-        "**/*Test*.*", "android/**/*.*", "**/androidx/**/*.*",
-        "**/*$*.*"
-    )
-
-    val debugTree = fileTree("${layout.buildDirectory.get().asFile}/tmp/kotlin-classes/debug") {
-        exclude(fileFilter)
-    }
-
-    classDirectories.setFrom(debugTree)
-
-    sourceDirectories.setFrom(files("src/main/java"))
-
-    executionData.setFrom(fileTree(layout.buildDirectory.get().asFile) {
-        include(
-            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
-            "outputs/code_coverage/debugAndroidTest/connected/*/*.ec",
-            "**/*.exec",
-            "**/*.ec"
-        )
-    })
-}
 
 dependencies {
 
